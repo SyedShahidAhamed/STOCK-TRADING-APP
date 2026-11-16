@@ -17,7 +17,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'https://ss-stocks-trading.vercel.app',
-  'https://sb-stocks-trading-38k7o41iv-syedshahidahameds-projects.vercel.app',
+  'https://stock-trading-app-one-phi.vercel.app/',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
