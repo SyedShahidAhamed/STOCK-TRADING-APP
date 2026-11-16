@@ -18,6 +18,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'https://ss-stocks-trading.vercel.app',
   'https://stock-trading-app-one-phi.vercel.app/',
+   'https://stock-trading-o3svbfv3-syedshahidahameds-projects.vercel.app',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
