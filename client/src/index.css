@@ -1,0 +1,421 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary:   #0052cc;
+  --primary-dark: #003d99;
+  --success:   #00875a;
+  --danger:    #de350b;
+  --bg:        #f4f5f7;
+  --card-bg:   #ffffff;
+  --text:      #172b4d;
+  --text-muted:#6b778c;
+  --border:    #dfe1e6;
+  --shadow:    0 2px 8px rgba(0,0,0,.08);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s, transform .1s;
+}
+.btn:hover  { opacity: .88; }
+.btn:active { transform: scale(.97); }
+
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-success { background: var(--success); color: #fff; }
+.btn-danger  { background: var(--danger);  color: #fff; }
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+.btn-sm { padding: .35rem .8rem; font-size: .8rem; }
+
+.badge {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: 12px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+.badge-buy   { background: #e3fcef; color: var(--success); }
+.badge-sell  { background: #ffebe6; color: var(--danger);  }
+.badge-green { background: #e3fcef; color: var(--success); }
+.badge-red   { background: #ffebe6; color: var(--danger);  }
+
+input, select {
+  width: 100%;
+  padding: .6rem .9rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: .9rem;
+  outline: none;
+  background: #fff;
+  color: var(--text);
+  transition: border-color .2s;
+}
+input:focus, select:focus { border-color: var(--primary); }
+
+label {
+  display: block;
+  font-size: .85rem;
+  font-weight: 600;
+  margin-bottom: .3rem;
+  color: var(--text-muted);
+}
+
+.form-group { margin-bottom: 1rem; }
+
+.positive { color: var(--success); }
+.negative { color: var(--danger);  }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+th, td {
+  padding: .75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+th {
+  background: #f4f5f7;
+  font-weight: 700;
+  color: var(--text-muted);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+tr:hover { background: #fafbfc; }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.page-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+.empty-state p { margin-top: .5rem; font-size: .95rem; }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+.spinner::after {
+  content: '';
+  width: 36px;
+  height: 36px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+
+/* =========================================================
+   FLUID RESPONSIVE SYSTEM
+   No breakpoint-specific media queries. Desktop styling is
+   retained; layouts adapt naturally to the available width.
+========================================================= */
+
+html {
+  width: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body, #root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+button, input, select, textarea { font: inherit; }
+button, .btn, a { -webkit-tap-highlight-color: transparent; }
+img, svg, video, canvas { max-width: 100%; }
+
+.container {
+  width: min(100% - 2rem, 1200px);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.card {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Grid columns retain their desktop count when space permits and
+   automatically wrap into fewer columns when the viewport narrows. */
+.grid-2, .grid-3, .grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(.75rem, 1.6vw, 1rem);
+}
+
+/* Keep wide data readable: scroll the table itself, not the page. */
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+}
+table th, table td { white-space: nowrap; }
+
+/* Flexible navbar: items wrap only when the available width requires it. */
+.navbar { width: 100%; }
+.nav-inner {
+  width: 100%;
+  min-width: 0;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .65rem clamp(.65rem, 1.8vw, 1.5rem);
+  padding-block: .55rem;
+}
+.nav-brand { flex: 0 0 auto; min-width: 0; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex: 1 1 480px;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: .35rem clamp(.6rem, 1.5vw, 1.2rem);
+}
+.nav-links a { white-space: nowrap; }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: .4rem;
+  margin-left: auto;
+}
+.nav-balance { white-space: nowrap; }
+
+/* Headers, search and result rows can wrap without clipping. */
+.page-header, .home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: .75rem;
+}
+.page-header h2, .home-header h2 { overflow-wrap: anywhere; }
+.search-form {
+  display: flex;
+  flex: 1 1 320px;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: .6rem;
+}
+.search-form input { flex: 1 1 180px; min-width: 0; }
+.search-form .btn { flex: 0 0 auto; }
+.search-result-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: .5rem 1rem;
+}
+.search-result-item span:not(.exch) { overflow-wrap: anywhere; }
+.search-result-item .exch { margin-left: auto; }
+
+/* Landing page: two-column desktop hero becomes one column only when
+   the content can no longer fit comfortably. */
+.hero { padding-block: clamp(3rem, 6vw, 5rem); }
+.hero-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.hero-text, .hero-visual { min-width: 0; }
+.hero-text h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); overflow-wrap: anywhere; }
+.hero-text p { font-size: clamp(1rem, 1.5vw, 1.1rem); }
+.hero-cta { flex-wrap: wrap; }
+.mock-chart { min-width: 0; padding: clamp(1rem, 2.5vw, 1.5rem); }
+.mock-ticker { flex-wrap: wrap; }
+.mock-stats { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+.mock-stat { min-width: 0; }
+
+/* Stock detail: flex wrapping preserves the desktop chart/trade-panel
+   arrangement while allowing the panel to move below the chart on narrow screens. */
+.stock-body {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: clamp(.75rem, 2vw, 1.2rem);
+}
+.chart-card { flex: 1 1 580px; min-width: min(100%, 280px); }
+.trade-panel { flex: 0 1 300px; min-width: min(100%, 260px); }
+.stock-info { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .75rem; }
+.stock-info > *, .price-block { min-width: 0; }
+.stock-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr));
+  gap: .8rem;
+}
+.stock-meta > div { min-width: 0; overflow-wrap: anywhere; }
+.period-tabs { display: flex; flex-wrap: wrap; gap: .4rem; }
+.period-tab { flex: 0 1 auto; }
+
+/* Authentication and admin content */
+.auth-page { width: 100%; min-height: 100svh; padding: clamp(.75rem, 3vw, 2rem); }
+.auth-card { width: min(100%, 420px); min-width: 0; margin-inline: auto; }
+.admin-page, .home-page, .stock-page { min-width: 0; }
+.admin-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* Prevent long labels, URLs and numbers from forcing horizontal overflow. */
+.card, .container, section, main, article, aside, form,
+.admin-stat-card, .stock-tile, .feature-card {
+  min-width: 0;
+}
+input, select, textarea { max-width: 100%; min-width: 0; }
+.btn { max-width: 100%; white-space: normal; justify-content: center; }
+
+
+/* Record tables: preserve the existing desktop table styling exactly.
+   Only the record tables change to Field / Details rows when their own
+   available width is in the mobile/tablet range. */
+.records-table-wrap {
+  width: 100%;
+  min-width: 0;
+  container-type: inline-size;
+}
+
+/* Undo the generic fluid-table treatment only inside these record tables,
+   so desktop keeps the original full-width HTML table presentation. */
+.records-table-wrap table {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  white-space: normal;
+  border-collapse: collapse;
+}
+.records-table-wrap th,
+.records-table-wrap td {
+  white-space: normal;
+}
+
+@container (max-width: 900px) {
+  .records-table-wrap table,
+  .records-table-wrap tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .records-table-wrap thead {
+    display: none;
+  }
+
+  .records-table-wrap tbody tr {
+    display: block;
+    width: 100%;
+    padding: .25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .records-table-wrap tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .records-table-wrap tbody td {
+    display: grid;
+    grid-template-columns: minmax(6.5rem, 38%) minmax(0, 1fr);
+    align-items: start;
+    gap: .75rem;
+    width: 100%;
+    min-width: 0;
+    padding: .72rem .15rem;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    font-size: .88rem;
+    line-height: 1.45;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .records-table-wrap tbody td:last-child {
+    border-bottom: 0;
+  }
+
+  .records-table-wrap tbody td::before {
+    content: attr(data-label);
+    min-width: 0;
+    color: var(--text-muted);
+    font-size: .82rem;
+    font-weight: 700;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .records-table-wrap tbody td > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
